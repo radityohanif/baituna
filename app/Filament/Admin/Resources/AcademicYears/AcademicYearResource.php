@@ -7,6 +7,7 @@ use App\Filament\Admin\Resources\AcademicYears\Schemas\AcademicYearForm;
 use App\Filament\Admin\Resources\AcademicYears\Tables\AcademicYearsTable;
 use App\Models\AcademicYear;
 use BackedEnum;
+use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -19,7 +20,7 @@ class AcademicYearResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Master';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = LucideIcon::Calendar;
 
     public static function form(Schema $schema): Schema
     {

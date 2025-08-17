@@ -9,6 +9,7 @@ use App\Filament\Admin\Resources\Categories\Schemas\CategoryForm;
 use App\Filament\Admin\Resources\Categories\Tables\CategoriesTable;
 use App\Models\Category;
 use BackedEnum;
+use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -21,7 +22,7 @@ class CategoryResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Finance';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = LucideIcon::Tag;
 
     public static function form(Schema $schema): Schema
     {

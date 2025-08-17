@@ -9,6 +9,7 @@ use App\Filament\Admin\Resources\Bills\Schemas\BillForm;
 use App\Filament\Admin\Resources\Bills\Tables\BillsTable;
 use App\Models\Bill;
 use BackedEnum;
+use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -21,7 +22,7 @@ class BillResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Billing';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = LucideIcon::FileText;
 
     public static function form(Schema $schema): Schema
     {

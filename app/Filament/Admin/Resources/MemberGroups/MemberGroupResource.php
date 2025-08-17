@@ -13,10 +13,13 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class MemberGroupResource extends Resource
 {
     protected static ?string $model = MemberGroup::class;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Master';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 

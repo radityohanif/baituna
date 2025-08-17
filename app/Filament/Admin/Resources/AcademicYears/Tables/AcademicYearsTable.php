@@ -32,7 +32,7 @@ class AcademicYearsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()->slideOver(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

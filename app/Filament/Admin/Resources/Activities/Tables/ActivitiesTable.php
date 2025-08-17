@@ -16,8 +16,6 @@ class ActivitiesTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('description')
-                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -31,7 +29,7 @@ class ActivitiesTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()->slideOver(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

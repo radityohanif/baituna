@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Activities\Schemas;
 
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -13,7 +14,8 @@ class ActivityForm
             ->components([
                 TextInput::make('name')
                     ->required(),
-                TextInput::make('description'),
-            ]);
+                Textarea::make('description'),
+            ])
+            ->columns(1);
     }
 }

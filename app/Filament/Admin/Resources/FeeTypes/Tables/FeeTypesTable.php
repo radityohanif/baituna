@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class FeeTypesTable
@@ -17,8 +18,8 @@ class FeeTypesTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                IconColumn::make('is_recurring')
-                    ->boolean(),
+                ToggleColumn::make('is_recurring')
+                    ->label('Recurring Payment'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -32,7 +33,7 @@ class FeeTypesTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()->slideOver(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

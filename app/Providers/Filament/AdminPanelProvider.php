@@ -35,7 +35,6 @@ class AdminPanelProvider extends PanelProvider
                 family: 'Roboto',
                 provider: GoogleFontProvider::class
             )
-            ->sidebarCollapsibleOnDesktop()
             ->brandLogo(url('images/logo.png'))
             ->brandLogoHeight('50px')
             ->login()

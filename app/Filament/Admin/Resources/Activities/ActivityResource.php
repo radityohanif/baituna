@@ -2,8 +2,6 @@
 
 namespace App\Filament\Admin\Resources\Activities;
 
-use App\Filament\Admin\Resources\Activities\Pages\CreateActivity;
-use App\Filament\Admin\Resources\Activities\Pages\EditActivity;
 use App\Filament\Admin\Resources\Activities\Pages\ListActivities;
 use App\Filament\Admin\Resources\Activities\Schemas\ActivityForm;
 use App\Filament\Admin\Resources\Activities\Tables\ActivitiesTable;
@@ -13,10 +11,13 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class ActivityResource extends Resource
 {
     protected static ?string $model = Activity::class;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Master';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -41,8 +42,6 @@ class ActivityResource extends Resource
     {
         return [
             'index' => ListActivities::route('/'),
-            'create' => CreateActivity::route('/create'),
-            'edit' => EditActivity::route('/{record}/edit'),
         ];
     }
 }

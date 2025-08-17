@@ -2,8 +2,6 @@
 
 namespace App\Filament\Admin\Resources\AcademicYears;
 
-use App\Filament\Admin\Resources\AcademicYears\Pages\CreateAcademicYear;
-use App\Filament\Admin\Resources\AcademicYears\Pages\EditAcademicYear;
 use App\Filament\Admin\Resources\AcademicYears\Pages\ListAcademicYears;
 use App\Filament\Admin\Resources\AcademicYears\Schemas\AcademicYearForm;
 use App\Filament\Admin\Resources\AcademicYears\Tables\AcademicYearsTable;
@@ -13,10 +11,13 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class AcademicYearResource extends Resource
 {
     protected static ?string $model = AcademicYear::class;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Master';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -41,8 +42,6 @@ class AcademicYearResource extends Resource
     {
         return [
             'index' => ListAcademicYears::route('/'),
-            'create' => CreateAcademicYear::route('/create'),
-            'edit' => EditAcademicYear::route('/{record}/edit'),
         ];
     }
 }

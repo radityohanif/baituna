@@ -2,7 +2,11 @@
 
 namespace App\Filament\Admin\Resources\ActivityFees\Schemas;
 
-use Filament\Forms\Components\TextInput;
+use App\Components\Forms\MoneyInput;
+use App\Models\AcademicYear;
+use App\Models\Activity;
+use App\Models\FeeType;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 
 class ActivityFeeForm
@@ -11,17 +15,18 @@ class ActivityFeeForm
     {
         return $schema
             ->components([
-                TextInput::make('activity_id')
+                Select::make('activity_id')
                     ->required()
-                    ->numeric(),
-                TextInput::make('fee_type_id')
+                    ->label('Activity')
+                    ->options(fn() => Activity::all()->pluck('name', 'id')),
+                Select::make('fee_type_id')
                     ->required()
-                    ->numeric(),
-                TextInput::make('academic_year_id')
-                    ->numeric(),
-                TextInput::make('amount')
-                    ->required()
-                    ->numeric(),
-            ]);
+                    ->label('Fee Type')
+                    ->options(fn() => FeeType::all()->pluck('name', 'id')),
+                Select::make('academic_year_id')
+                    ->label('Academic Year')
+                    ->options(fn() => AcademicYear::all()->pluck('name', 'id')),
+                MoneyInput::make('amount')
+            ])->columns(1)->inlineLabel();
     }
 }

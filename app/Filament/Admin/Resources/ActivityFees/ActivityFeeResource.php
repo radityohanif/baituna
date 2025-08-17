@@ -2,8 +2,6 @@
 
 namespace App\Filament\Admin\Resources\ActivityFees;
 
-use App\Filament\Admin\Resources\ActivityFees\Pages\CreateActivityFee;
-use App\Filament\Admin\Resources\ActivityFees\Pages\EditActivityFee;
 use App\Filament\Admin\Resources\ActivityFees\Pages\ListActivityFees;
 use App\Filament\Admin\Resources\ActivityFees\Schemas\ActivityFeeForm;
 use App\Filament\Admin\Resources\ActivityFees\Tables\ActivityFeesTable;
@@ -13,10 +11,13 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class ActivityFeeResource extends Resource
 {
     protected static ?string $model = ActivityFee::class;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Master';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -41,8 +42,6 @@ class ActivityFeeResource extends Resource
     {
         return [
             'index' => ListActivityFees::route('/'),
-            'create' => CreateActivityFee::route('/create'),
-            'edit' => EditActivityFee::route('/{record}/edit'),
         ];
     }
 }

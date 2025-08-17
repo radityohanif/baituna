@@ -2,8 +2,6 @@
 
 namespace App\Filament\Admin\Resources\FeeTypes;
 
-use App\Filament\Admin\Resources\FeeTypes\Pages\CreateFeeType;
-use App\Filament\Admin\Resources\FeeTypes\Pages\EditFeeType;
 use App\Filament\Admin\Resources\FeeTypes\Pages\ListFeeTypes;
 use App\Filament\Admin\Resources\FeeTypes\Schemas\FeeTypeForm;
 use App\Filament\Admin\Resources\FeeTypes\Tables\FeeTypesTable;
@@ -13,10 +11,13 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class FeeTypeResource extends Resource
 {
     protected static ?string $model = FeeType::class;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Master';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -41,8 +42,6 @@ class FeeTypeResource extends Resource
     {
         return [
             'index' => ListFeeTypes::route('/'),
-            'create' => CreateFeeType::route('/create'),
-            'edit' => EditFeeType::route('/{record}/edit'),
         ];
     }
 }

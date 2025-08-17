@@ -15,6 +15,7 @@ class AcademicYearForm
                 TextInput::make('name')
                     ->required(),
                 DatePicker::make('start_date')
+                    ->default(fn() => today())
                     ->required(),
             ]);
     }

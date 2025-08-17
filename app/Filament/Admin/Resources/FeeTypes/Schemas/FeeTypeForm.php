@@ -15,7 +15,9 @@ class FeeTypeForm
                 TextInput::make('name')
                     ->required(),
                 Toggle::make('is_recurring')
+                    ->label('Recurring Payment') // optional, clearer label
+                    ->helperText('Check this if the fee is recurring every month, e.g., monthly tuition (SPP).')
                     ->required(),
-            ]);
+            ])->columns(1)->inlineLabel();
     }
 }

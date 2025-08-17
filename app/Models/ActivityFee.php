@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActivityFee extends Model
 {
+    protected $casts = [
+        'amount' => 'int'
+    ];
+
     public function activity()
     {
         return $this->belongsTo(Activity::class);

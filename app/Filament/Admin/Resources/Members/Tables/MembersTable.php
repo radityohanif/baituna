@@ -14,21 +14,7 @@ class MembersTable
     {
         return $table
             ->columns([
-                TextColumn::make('member_group_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('birth_date')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('gender')
-                    ->searchable(),
-                TextColumn::make('parent_name')
-                    ->searchable(),
-                TextColumn::make('phone')
-                    ->searchable(),
-                TextColumn::make('address')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

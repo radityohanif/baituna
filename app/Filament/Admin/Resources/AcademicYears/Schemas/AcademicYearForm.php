@@ -17,6 +17,8 @@ class AcademicYearForm
                 DatePicker::make('start_date')
                     ->default(fn() => today())
                     ->required(),
-            ]);
+            ])
+            ->columns(1)
+            ->inlineLabel();
     }
 }

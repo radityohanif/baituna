@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources\ActivityFees\Tables;
 
 use App\Models\AcademicYear;
 use App\Models\Activity;
+use App\Models\FeeType;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -44,9 +45,16 @@ class ActivityFeesTable
                 SelectFilter::make('academic_year_id')
                     ->label('Academic Year')
                     ->options(fn() => AcademicYear::all()->pluck('name', 'id')),
+                SelectFilter::make('fee_type_id')
+                    ->label('Fee Type')
+                    ->options(fn() => FeeType::all()->pluck('name', 'id')),
             ])
             ->recordActions([
-                EditAction::make()->slideOver(),
+                EditAction::make()
+                    ->slideOver()
+                    ->mutateRecordDataUsing(function (array $data) {
+                        return $data;
+                    }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

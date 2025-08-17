@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->default()
             ->font(
-                family: 'Roboto',
+                family: 'Noto Sans',
                 provider: GoogleFontProvider::class
             )
             ->brandLogo(url('images/logo.png'))

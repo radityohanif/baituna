@@ -17,6 +17,8 @@ class CategoryForm
                 Select::make('type')
                     ->options(['income' => 'Income', 'expense' => 'Expense'])
                     ->required(),
-            ]);
+            ])
+            ->inlineLabel()
+            ->columns(1);
     }
 }

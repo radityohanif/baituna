@@ -45,8 +45,6 @@ class MemberGroupResource extends Resource
     {
         return [
             'index' => ListMemberGroups::route('/'),
-            'create' => CreateMemberGroup::route('/create'),
-            'edit' => EditMemberGroup::route('/{record}/edit'),
         ];
     }
 }

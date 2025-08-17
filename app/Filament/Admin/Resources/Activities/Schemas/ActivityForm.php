@@ -16,6 +16,7 @@ class ActivityForm
                     ->required(),
                 Textarea::make('description'),
             ])
+            ->inlineLabel()
             ->columns(1);
     }
 }

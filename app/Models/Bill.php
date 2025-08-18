@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bill extends Model
 {
     protected $casts = [
+        'amount' => 'int',
         'status' => BillStatus::class
     ];
 

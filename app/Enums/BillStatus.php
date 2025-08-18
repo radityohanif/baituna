@@ -33,8 +33,8 @@ enum BillStatus: string implements HasLabel, HasIcon, HasColor
     public function getColor(): ?string
     {
         return match ($this) {
-            self::Pending => 'warning',
-            self::Partial => 'info',
+            self::Pending => 'info',
+            self::Partial => 'warning',
             self::Paid => 'success',
         };
     }

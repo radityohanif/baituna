@@ -8,6 +8,6 @@ class Member extends Model
 {
     public function activities()
     {
-        return $this->belongsToMany(Activity::class, 'member_activities');
+        return $this->hasMany(MemberActivity::class, 'member_id', 'id');
     }
 }

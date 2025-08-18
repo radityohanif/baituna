@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\Members;
 use App\Filament\Admin\Resources\Members\Pages\CreateMember;
 use App\Filament\Admin\Resources\Members\Pages\EditMember;
 use App\Filament\Admin\Resources\Members\Pages\ListMembers;
+use App\Filament\Admin\Resources\Members\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Admin\Resources\Members\Schemas\MemberForm;
 use App\Filament\Admin\Resources\Members\Tables\MembersTable;
 use App\Models\Member;
@@ -12,7 +13,6 @@ use BackedEnum;
 use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -37,7 +37,7 @@ class MemberResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ActivitiesRelationManager::class
         ];
     }
 

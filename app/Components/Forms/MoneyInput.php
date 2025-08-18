@@ -8,6 +8,6 @@ class MoneyInput
 {
     public static function make(string $key): Forms\Components\TextInput
     {
-        return NumberInput::make($key)->prefix('Rp.');
+        return NumberInput::make($key)->prefix('IDR');
     }
 }

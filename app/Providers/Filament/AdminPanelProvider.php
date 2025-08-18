@@ -20,7 +20,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
-use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -39,7 +38,8 @@ class AdminPanelProvider extends PanelProvider
                 provider: GoogleFontProvider::class
             )
             ->databaseNotifications()
-            ->brandLogo(url('images/logo.png'))
+            ->brandName('Sekolah')
+            // ->brandLogo(url('images/logo.png'))
             ->brandLogoHeight('50px')
             ->login()
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')

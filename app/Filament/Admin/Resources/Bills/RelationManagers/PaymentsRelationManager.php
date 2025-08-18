@@ -8,9 +8,10 @@ use App\Models\Payment;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class PaymentsRelationManager extends RelationManager
@@ -28,10 +29,15 @@ class PaymentsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->columns([])
+            ->columns([
+                TextColumn::make('number'),
+                TextColumn::make('amount')->money(currency: 'IDR'),
+                TextColumn::make('payment_date')->dateTime(),
+            ])
             ->headerActions([
                 CreateAction::make()
                     ->action(function (array $data) {
+                        $data['member_id'] = $this->getOwnerRecord()->member_id;
                         $data['bill_id'] = $this->getOwnerRecord()->id;
                         $remainingPayment = $this->getOwnerRecord()->remaining_payment;
                         $paymentAmount = intval($data['amount']);
@@ -40,12 +46,13 @@ class PaymentsRelationManager extends RelationManager
                         } else {
                             $this->getOwnerRecord()->status = BillStatus::Paid;
                         }
+                        $this->getOwnerRecord()->save();
                         Payment::create($data);
                     })
                     ->slideOver(),
             ])
             ->recordActions([
-                EditAction::make(),
+                ViewAction::make()->slideOver(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

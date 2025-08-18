@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Payments\Tables;
 
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -11,20 +12,19 @@ class PaymentsTable
     {
         return $table
             ->columns([
-                TextColumn::make('member_id')
+                TextColumn::make('number')->searchable(),
+                TextColumn::make('member.name')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('bill_id')
+                TextColumn::make('bill.number')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('amount')
-                    ->numeric()
+                    ->money(currency: 'IDR')
                     ->sortable(),
                 TextColumn::make('payment_date')
                     ->date()
                     ->sortable(),
-                TextColumn::make('method')
-                    ->searchable(),
                 TextColumn::make('notes')
                     ->searchable(),
                 TextColumn::make('created_at')
@@ -36,9 +36,8 @@ class PaymentsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                //
-            ])
-            ->recordActions([]);
+            ->recordActions([
+                ViewAction::make()->slideOver()
+            ]);
     }
 }

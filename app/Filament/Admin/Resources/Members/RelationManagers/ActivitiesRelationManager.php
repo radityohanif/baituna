@@ -26,6 +26,7 @@ class ActivitiesRelationManager extends RelationManager
     {
         return $table
             ->columns([
+                TextColumn::make('created_at')->dateTime(),
                 TextColumn::make('activity.name'),
                 TextColumn::make('academic_year.name'),
             ])

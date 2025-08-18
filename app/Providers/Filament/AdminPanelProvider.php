@@ -35,6 +35,7 @@ class AdminPanelProvider extends PanelProvider
                 family: 'Noto Sans',
                 provider: GoogleFontProvider::class
             )
+            ->databaseNotifications()
             ->brandLogo(url('images/logo.png'))
             ->brandLogoHeight('50px')
             ->login()

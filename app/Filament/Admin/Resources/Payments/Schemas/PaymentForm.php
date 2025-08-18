@@ -13,7 +13,8 @@ class PaymentForm
 {
     public static function configure(
         Schema $schema,
-        int $billAmount = 0
+        int $billAmount = 0,
+        bool $bulkPayment = false
     ): Schema {
         return $schema
             ->components([
@@ -22,6 +23,7 @@ class PaymentForm
                     ->columnSpanFull()
                     ->required()
                     ->rules(['numeric', 'gt:0'])
+                    ->visible(fn() => $bulkPayment == false)
                     ->default(fn() => $billAmount),
 
                 DatePicker::make('payment_date')

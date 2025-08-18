@@ -3,14 +3,19 @@
 namespace App\Filament\Admin\Resources\Bills\Tables;
 
 use App\Enums\BillStatus;
+use App\Filament\Admin\Resources\Payments\Schemas\PaymentForm;
 use App\Models\AcademicYear;
 use App\Models\Activity;
 use App\Models\FeeType;
 use App\Models\Member;
+use App\Models\Payment;
+use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -108,6 +113,34 @@ class BillsTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    BulkAction::make('make_full_payment')
+                        ->icon(LucideIcon::CircleCheck)
+                        ->color('primary')
+                        ->schema(
+                            fn($schema) =>
+                            PaymentForm::configure(
+                                schema: $schema,
+                                bulkPayment: true
+                            )
+                        )
+                        ->slideOver()
+                        ->action(function ($records, array $data) {
+                            foreach ($records as $record) {
+                                if ($record->remaining > 0) {
+                                    $data['amount'] = $record->remaining;
+                                    $data['member_id'] = $record->member_id;
+                                    $data['bill_id'] = $record->id;
+                                    Payment::create($data);
+                                    $record->status = BillStatus::Paid;
+                                    $record->save();
+                                }
+                            }
+                            Notification::make()
+                                ->title('Bill Paid in Full')
+                                ->body('Your selected bill is now fully settled.')
+                                ->success()
+                                ->send();
+                        })
                 ]),
             ]);
     }

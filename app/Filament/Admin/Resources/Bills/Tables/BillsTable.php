@@ -25,6 +25,7 @@ class BillsTable
     {
         return $table
             ->columns([
+                TextColumn::make('number')->sortable(),
                 TextColumn::make('member.name'),
                 TextColumn::make('date')
                     ->label('Month')

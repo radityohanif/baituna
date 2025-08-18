@@ -2,8 +2,6 @@
 
 namespace App\Filament\Admin\Resources\Payments;
 
-use App\Filament\Admin\Resources\Payments\Pages\CreatePayment;
-use App\Filament\Admin\Resources\Payments\Pages\EditPayment;
 use App\Filament\Admin\Resources\Payments\Pages\ListPayments;
 use App\Filament\Admin\Resources\Payments\Schemas\PaymentForm;
 use App\Filament\Admin\Resources\Payments\Tables\PaymentsTable;
@@ -12,7 +10,6 @@ use BackedEnum;
 use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -45,8 +42,6 @@ class PaymentResource extends Resource
     {
         return [
             'index' => ListPayments::route('/'),
-            'create' => CreatePayment::route('/create'),
-            'edit' => EditPayment::route('/{record}/edit'),
         ];
     }
 }

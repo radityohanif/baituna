@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\Members\Tables;
 use App\Models\AcademicYear;
 use App\Models\Activity;
 use App\Models\MemberActivity;
+use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -60,6 +61,8 @@ class MembersTable
                     DeleteBulkAction::make(),
                     BulkAction::make('enroll_activity')
                         ->label('Enroll in Activity')
+                        ->icon(LucideIcon::ArrowUpRight)
+                        ->color('primary')
                         ->slideOver()
                         ->modalWidth(Width::Large)
                         ->schema([

@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarWidth('250px')
             ->default()
             ->font(
-                family: 'Noto Sans',
+                family: 'TikTok Sans',
                 provider: GoogleFontProvider::class
             )
             ->databaseNotifications()

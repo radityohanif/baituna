@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getAvatarUrlAttribute()
+    {
+        return 'https://ui-avatars.com/api/?background=FF6300&color=fff&name=' . $this->name;
+    }
 }

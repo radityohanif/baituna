@@ -16,7 +16,7 @@ class NumberInput
                     $money($input, ',', '.', 3)
                 JS)
             )
-            ->live(debounce: 300)
+            ->reactive()
             ->stripCharacters('.');
     }
 }

@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Orange,
             ])
+            ->sidebarWidth('250px')
             ->default()
             ->font(
                 family: 'Noto Sans',

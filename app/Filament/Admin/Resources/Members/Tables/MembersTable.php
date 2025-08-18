@@ -44,6 +44,16 @@ class MembersTable
                             });
                         }
                     }),
+                SelectFilter::make('enrollment_year_id')
+                    ->label('Academic Year')
+                    ->options(fn() => AcademicYear::all()->pluck('name', 'id'))
+                    ->query(function ($query, array $data) {
+                        if ($data['value']) {
+                            $query->whereHas('activities', function ($q) use ($data) {
+                                $q->where('enrollment_year_id', $data['value']);
+                            });
+                        }
+                    }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

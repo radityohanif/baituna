@@ -24,4 +24,13 @@ class ActivityFee extends Model
     {
         return $this->belongsTo(AcademicYear::class);
     }
+
+    public function getNameAttribute()
+    {
+        return implode(' - ', array_filter([
+            $this->activity?->name,
+            $this->fee_type?->name,
+            $this->academic_year?->name,
+        ]));
+    }
 }

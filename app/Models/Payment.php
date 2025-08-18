@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentMethod;
 use App\Traits\HasDocumentNumber;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +13,9 @@ class Payment extends Model
     const DOCUMENT_PREFIX = 'PAY';
 
     protected $casts = [
-        'amount' => 'int'
+        'amount' => 'int',
+        'payment_date' => 'date',
+        'method' => PaymentMethod::class
     ];
 
     public function member()

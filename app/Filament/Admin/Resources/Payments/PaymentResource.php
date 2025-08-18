@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources\Payments;
 
 use App\Filament\Admin\Resources\Payments\Pages\ListPayments;
+use App\Filament\Admin\Resources\Payments\Pages\ViewPayment;
 use App\Filament\Admin\Resources\Payments\Schemas\PaymentForm;
 use App\Filament\Admin\Resources\Payments\Tables\PaymentsTable;
 use App\Models\Payment;
@@ -42,6 +43,7 @@ class PaymentResource extends Resource
     {
         return [
             'index' => ListPayments::route('/'),
+            'view' => ViewPayment::route('/{record}/view'),
         ];
     }
 }

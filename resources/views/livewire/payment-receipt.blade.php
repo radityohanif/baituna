@@ -1,0 +1,112 @@
+<div class="receipt-wrapper">
+    <style>
+        .receipt-wrapper {
+            font-family: inherit;
+            background: #f2f5f9;
+            padding: 30px;
+            color: #333;
+        }
+        .receipt-wrapper .receipt {
+            max-width: 420px;
+            margin: auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .receipt-wrapper .header {
+            text-align: center;
+            padding: 30px 20px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .receipt-wrapper .header img {
+            width: 100px;
+            margin-bottom: 15px;
+        }
+        .receipt-wrapper .amount {
+            font-size: 28px;
+            font-weight: bold;
+            color: #111;
+        }
+        .receipt-wrapper .merchant {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+        .receipt-wrapper .details {
+            padding: 20px;
+        }
+        .receipt-wrapper .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            border-bottom: 1px dashed #eee;
+        }
+        .receipt-wrapper .detail-row:last-child {
+            border-bottom: none;
+        }
+        .receipt-wrapper .label {
+            color: #666;
+        }
+        .receipt-wrapper .value {
+            font-weight: 500;
+            color: #222;
+            text-align: right;
+        }
+        .receipt-wrapper .footer {
+            background: #f9fafc;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+        }
+        .receipt-wrapper .success {
+            text-align: center;
+            padding: 15px 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="receipt">
+        <div class="header">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo">
+            <div class="amount">Rp {{ number_format($payment->amount, 0, ',', '.') }}</div>
+            <div class="merchant">
+                {{ $payment->member->name ?? 'Member' }}<br>
+                {{ $payment->bill->number ?? '' }}
+            </div>
+        </div>
+
+        <div class="success">✅ Payment Success</div>
+
+        <div class="details">
+            <div class="detail-row">
+                <div class="label">Payment Method</div>
+                <div class="value">{{ ucfirst($payment->method->getLabel()) }}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Status</div>
+                <div class="value">Completed</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Date</div>
+                <div class="value">{{ $payment->payment_date->format('d M Y') }}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Time</div>
+                <div class="value">{{ $payment->payment_date->format('H:i') }}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Reference No</div>
+                <div class="value">{{ $payment->number }}</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Jazakumullahu khairan katsīran 🙏 <br>
+            {{ now()->format('d M Y H:i') }}
+        </div>
+    </div>
+</div>

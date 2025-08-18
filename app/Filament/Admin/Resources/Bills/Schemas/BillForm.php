@@ -9,9 +9,7 @@ use App\Models\Member;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Group;
-use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class BillForm
@@ -20,12 +18,6 @@ class BillForm
     {
         return $schema
             ->components([
-                Section::make([
-                    TextEntry::make('status')->badge(),
-                    TextEntry::make('remaining_payment')
-                        ->label('Remaining')
-                        ->money(currency: 'IDR'),
-                ])->hiddenOn(['create']),
                 Group::make()
                     ->columns(2)
                     ->columnSpan(2)

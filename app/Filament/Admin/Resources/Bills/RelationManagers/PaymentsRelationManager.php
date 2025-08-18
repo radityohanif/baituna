@@ -9,6 +9,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
@@ -22,7 +23,7 @@ class PaymentsRelationManager extends RelationManager
     {
         return PaymentForm::configure(
             schema: $schema,
-            billAmount: $this->ownerRecord->amount
+            billAmount: $this->ownerRecord->remaining
         );
     }
 
@@ -36,17 +37,30 @@ class PaymentsRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateAction::make()
-                    ->action(function (array $data) {
+                    ->action(function (array $data, CreateAction $action) {
                         $data['member_id'] = $this->getOwnerRecord()->member_id;
                         $data['bill_id'] = $this->getOwnerRecord()->id;
-                        $remainingPayment = $this->getOwnerRecord()->remaining_payment;
+                        $remaining = $this->getOwnerRecord()->remaining;
+
+                        if ($remaining <= 0) {
+                            Notification::make()
+                                ->danger()
+                                ->title('Bill already paid')
+                                ->body('This bill has been fully paid.')
+                                ->send();
+                            $action->halt();
+                        }
+
                         $paymentAmount = intval($data['amount']);
-                        if ($remainingPayment > $paymentAmount) {
+
+                        if ($remaining > $paymentAmount) {
                             $this->getOwnerRecord()->status = BillStatus::Partial;
                         } else {
                             $this->getOwnerRecord()->status = BillStatus::Paid;
                         }
+
                         $this->getOwnerRecord()->save();
+
                         Payment::create($data);
                     })
                     ->slideOver(),

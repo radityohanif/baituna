@@ -38,8 +38,7 @@ class AdminPanelProvider extends PanelProvider
                 provider: GoogleFontProvider::class
             )
             ->databaseNotifications()
-            ->brandName('Sekolah')
-            // ->brandLogo(url('images/logo.png'))
+            ->brandLogo(url('images/logo.png'))
             ->brandLogoHeight('50px')
             ->login()
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')

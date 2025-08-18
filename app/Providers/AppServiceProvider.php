@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Filament\Notifications\Livewire\Notifications;
 use Filament\Support\Assets\Css;
+use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
+        Notifications::alignment(Alignment::Center);
         FilamentAsset::register([
             Css::make('scrollbar', __DIR__ . '/../../resources/css/scrollbar.css'),
         ]);

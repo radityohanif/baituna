@@ -33,7 +33,7 @@ class Bill extends Model
         return $this->hasMany(Payment::class);
     }
 
-    public function getRemainingPaymentAttribute()
+    public function getRemainingAttribute()
     {
         $totalPaid = $this->payments()->sum('amount');
         return $this->amount - $totalPaid;

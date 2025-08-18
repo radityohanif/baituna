@@ -21,6 +21,7 @@ class PaymentForm
                     ->label('Payment Amount')
                     ->columnSpanFull()
                     ->required()
+                    ->rules(['numeric', 'gt:0'])
                     ->default(fn() => $billAmount),
 
                 DatePicker::make('payment_date')

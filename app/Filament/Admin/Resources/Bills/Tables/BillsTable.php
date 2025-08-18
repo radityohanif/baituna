@@ -10,11 +10,14 @@ use App\Models\Member;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Carbon;
 
 class BillsTable
 {
@@ -23,6 +26,9 @@ class BillsTable
         return $table
             ->columns([
                 TextColumn::make('member.name'),
+                TextColumn::make('date')
+                    ->label('Month')
+                    ->date(format: 'M-Y'),
                 TextColumn::make('activity_fee.name'),
                 TextColumn::make('amount')
                     ->numeric()
@@ -41,6 +47,23 @@ class BillsTable
             ])
             ->filtersLayout(FiltersLayout::AboveContent)
             ->filters([
+                Filter::make('billing_month')
+                    ->label('Billing Month')
+                    ->schema([
+                        DatePicker::make('month')
+                            ->label('Bill Period')
+                            ->displayFormat('F Y') // tampilannya "Aug 2025"
+                            ->native(false),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query
+                            ->when(
+                                $data['month'],
+                                fn($query, $date) => $query
+                                    ->whereMonth('date', Carbon::parse($date)->month)
+                                    ->whereYear('date', Carbon::parse($date)->year),
+                            );
+                    }),
                 SelectFilter::make('status')
                     ->options(BillStatus::class),
                 SelectFilter::make('member_id')

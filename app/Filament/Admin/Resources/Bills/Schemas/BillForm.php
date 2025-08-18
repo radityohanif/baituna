@@ -6,9 +6,9 @@ use App\Components\Forms\MoneyInput;
 use App\Enums\BillStatus;
 use App\Models\ActivityFee;
 use App\Models\Member;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class BillForm
@@ -19,6 +19,10 @@ class BillForm
             ->components([
                 Hidden::make('status')
                     ->default(fn() => BillStatus::Pending),
+                DatePicker::make('date')
+                    ->label('Bill Date')
+                    ->required()
+                    ->default(fn() => now()),
                 Select::make('member_id')
                     ->label('Member')
                     ->searchable()

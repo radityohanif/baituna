@@ -9,7 +9,8 @@ class Bill extends Model
 {
     protected $casts = [
         'amount' => 'int',
-        'status' => BillStatus::class
+        'status' => BillStatus::class,
+        'date' => 'datetime'
     ];
 
     public function member()

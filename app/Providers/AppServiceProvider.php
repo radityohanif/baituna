@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Notifications::alignment(Alignment::Center);
         FilamentAsset::register([
             Css::make('scrollbar', __DIR__ . '/../../resources/css/scrollbar.css'),
+            Css::make('background', __DIR__ . '/../../resources/css/background.css'),
             Js::make('custom-print', __DIR__ . '/../../resources/js/custom-print.js'),
         ]);
     }

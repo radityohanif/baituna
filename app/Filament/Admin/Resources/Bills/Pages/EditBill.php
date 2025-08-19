@@ -3,11 +3,14 @@
 namespace App\Filament\Admin\Resources\Bills\Pages;
 
 use App\Filament\Admin\Resources\Bills\BillResource;
+use App\Traits\HandlePageRedirect;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 
 class EditBill extends EditRecord
 {
+    use HandlePageRedirect;
+
     protected static string $resource = BillResource::class;
 
     public function getTitle(): string|Htmlable

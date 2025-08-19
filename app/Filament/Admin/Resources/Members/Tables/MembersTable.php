@@ -33,6 +33,7 @@ class MembersTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort(column: 'updated_at', direction: 'desc')
             ->filtersLayout(FiltersLayout::AboveContent)
             ->filters([
                 SelectFilter::make('activity_id')

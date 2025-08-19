@@ -28,7 +28,7 @@ class ViewPayment extends ViewRecord
         return $schema->schema([
             Group::make()
                 ->columns(1)
-                ->columnSpan(2)
+                ->columnSpan(4)
                 ->schema([
                     Action::make('printPdf')
                         ->label('Print')
@@ -56,7 +56,7 @@ class ViewPayment extends ViewRecord
                 data: [
                     'payment' => $this->getRecord()
                 ]
-            )->columnSpan(5)
-        ])->columns(7);
+            )->columnSpan(4)
+        ])->columns(8);
     }
 }

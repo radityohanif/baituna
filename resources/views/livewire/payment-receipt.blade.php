@@ -1,128 +1,152 @@
-<div class="receipt-wrapper">
+<div class="receipt-wrapper doc-template-container">
     <style>
-        .receipt-wrapper {
-            font-family: inherit;
-            background: #f2f5f9;
-            padding:20px;
-            color: #333;
+        @media print {
+            body {
+                print-color-adjust: exact !important;
+                -webkit-print-color-adjust: exact !important;
+                margin: 0;
+                padding: 0;
+            }
+
+            .receipt {
+                width: 90mm !important;
+                margin: auto;
+            }
+
+            @page {
+                size: auto;
+                margin: 5mm;
+            }
+
+            @page: first {
+                margin-top: 0;
+            }
+
+            .doc-template-container {
+                padding: 0 !important;
+                margin: 0 !important;
+
+                >div {
+                    overflow: hidden !important;
+                    max-height: none !important;
+                    max-width: none !important;
+                    box-shadow: none !important;
+                    border-radius: 0 !important;
+                }
+            }
+
+            .doc-template-paper {
+                overflow: hidden !important;
+                max-height: none !important;
+                max-width: none !important;
+                height: auto !important;
+                width: auto !important;
+            }
+
+            .doc-template-line-items .summary-section {
+                display: table-row-group;
+                page-break-inside: avoid;
+            }
+
+            .doc-template-line-items tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+
+            .doc-template-footer {
+                page-break-inside: avoid;
+                page-break-before: auto;
+            }
         }
-        .receipt-wrapper .receipt {
-            max-width: 420px;
-            margin: auto;
+
+        /* ---- Normal Screen Style ---- */
+        .receipt {
+            width: 420px;
             background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
-        .receipt-wrapper .header {
+
+        .receipt .header {
             text-align: center;
-            padding: 30px 20px 20px;
+            padding: 25px 20px 15px;
             border-bottom: 1px solid #eee;
         }
-        .receipt-wrapper .header img {
-            width: 100px;
-            margin-bottom: 15px;
+
+        .receipt .status {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 20px;
         }
-        .receipt-wrapper .amount {
-            font-size: 28px;
+
+        .receipt .amount {
+            font-size: 26px;
             font-weight: bold;
             color: #111;
+            margin: 0px 0;
         }
-        .receipt-wrapper .merchant {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #555;
-        }
-        .receipt-wrapper .details {
+
+        .receipt .details {
             padding: 20px;
         }
-        .receipt-wrapper .detail-row {
+
+        .receipt .detail-row {
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
             font-size: 14px;
-            border-bottom: 1px dashed #eee;
+            border-bottom: 1px dashed #e6e6e6;
         }
-        .receipt-wrapper .detail-row:last-child {
-            border-bottom: none;
-        }
-        .receipt-wrapper .label {
-            color: #666;
-        }
-        .receipt-wrapper .value {
-            font-weight: 500;
-            color: #222;
-            text-align: right;
-        }
-        .receipt-wrapper .footer {
-            background: #f9fafc;
-            padding: 15px;
+
+        .receipt .footer {
+            background: #fafafa;
+            padding: 12px 16px;
             text-align: center;
             font-size: 12px;
             color: #777;
         }
-        .receipt-wrapper .success {
-            text-align: center;
-            padding: 15px 0;
-            color: #28a745;
-            font-weight: bold;
-        }
     </style>
 
-    <div id="receiptArea" class="receipt">
+    <div class="receipt doc-template-paper">
         <div class="header">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" width="80">
+            <div class="status">Transaction Successful</div>
             <div class="amount">Rp {{ number_format($payment->amount, 0, ',', '.') }}</div>
-            <div class="merchant">
-                a/n
-                {{ $payment->member->name ?? 'Member' }}<br>
-                {{ $payment->bill->number ?? '' }}
-            </div>
+            <p>{{$payment->member->name}}</p>
         </div>
 
-        <div class="details">
-            <div class="detail-row">
-                <div class="label">Payment Method</div>
-                <div class="value">{{ ucfirst($payment->method->getLabel()) }}</div>
-            </div>
-            <div class="detail-row">
-                <div class="label">Status</div>
-                <div class="value">Completed</div>
-            </div>
-            @php
-                $note = $payment->note;
-            @endphp
-            @if ($note)
-            <div class="detail-row">
-                <div class="label">Note</div>
-                <div class="value">{{$note}}</div>
-            </div>
-            @endif
-            <div class="detail-row">
-                <div class="label">Activity</div>
-                <div class="value">{{$payment->bill->activity_fee->activity->name}}</div>
-            </div>
-            <div class="detail-row">
-                <div class="label">Fee Type</div>
-                <div class="value">{{$payment->bill->activity_fee->fee_type->name . ' ' . $payment->bill->date->format('M Y')}}</div>
-            </div>
-            <div class="detail-row">
-                <div class="label">Payment Date</div>
-                <div class="value">{{ $payment->payment_date->format('d M Y') }}</div>
-            </div>
-            <div class="detail-row">
-                <div class="label">Time</div>
-                <div class="value">{{ $payment->payment_date->format('H:i') }}</div>
-            </div>
+        <div class="details doc-template-line-items">
             <div class="detail-row">
                 <div class="label">Reference No</div>
                 <div class="value">{{ $payment->number }}</div>
             </div>
+            <div class="detail-row">
+                <div class="label">Payment Date</div>
+                <div class="value">{{ $payment->payment_date->format('d M Y H:i') }}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Activity</div>
+                <div class="value">{{ $payment->bill->activity_fee->activity->name ?? '-' }}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Fee Type</div>
+                <div class="value">{{ $payment->bill->activity_fee->fee_type->name ?? '-' }}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Bill No</div>
+                <div class="value">{{ $payment->bill->number ?? '-' }}</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Method</div>
+                <div class="value">{{ ucfirst($payment->method->getLabel()) }}</div>
+            </div>
         </div>
 
-        <div class="footer">
-            Jazakumullahu khairan katsīran 🙏 <br>
-            <small>Generated by baituna.sch.id {{ now()->format('d M Y H:i') }}</small>
+        <div class="footer doc-template-footer">
+            <div>Jazakumullahu khairan katsīran 🙏</div>
+            <small>Generated by baituna.sch.id • {{ now()->format('d M Y H:i') }}</small>
         </div>
     </div>
 </div>

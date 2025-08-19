@@ -1,9 +1,13 @@
 <div class="receipt-wrapper doc-template-container">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
+    </style>
+    <style>
         @media print {
             body {
                 print-color-adjust: exact !important;
                 -webkit-print-color-adjust: exact !important;
+                font-family: "TikTok Sans", sans-serif;
                 margin: 0;
                 padding: 0;
             }
@@ -114,7 +118,7 @@
             <img src="{{ asset('images/logo.png') }}" alt="Logo" width="80">
             <div class="status">Transaction Successful</div>
             <div class="amount">Rp {{ number_format($payment->amount, 0, ',', '.') }}</div>
-            <p>{{$payment->member->name}}</p>
+            <p>{{ $payment->member->name }}</p>
         </div>
 
         <div class="details doc-template-line-items">

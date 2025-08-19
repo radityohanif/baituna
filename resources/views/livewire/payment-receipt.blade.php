@@ -69,7 +69,7 @@
         }
     </style>
 
-    <div class="receipt">
+    <div id="receiptArea" class="receipt">
         <div class="header">
             <img src="{{ asset('images/logo.png') }}" alt="Logo">
             <div class="amount">Rp {{ number_format($payment->amount, 0, ',', '.') }}</div>

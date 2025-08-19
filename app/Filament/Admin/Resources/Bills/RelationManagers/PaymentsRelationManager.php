@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources\Bills\RelationManagers;
 
 use App\Enums\BillStatus;
+use App\Filament\Admin\Resources\Payments\Pages\ViewPayment;
 use App\Filament\Admin\Resources\Payments\Schemas\PaymentForm;
 use App\Models\Payment;
 use Filament\Actions\BulkActionGroup;
@@ -66,7 +67,7 @@ class PaymentsRelationManager extends RelationManager
                     ->slideOver(),
             ])
             ->recordActions([
-                ViewAction::make()->slideOver(),
+                ViewAction::make()->url(fn($record) => ViewPayment::getUrl(['record' => $record])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
